@@ -31,8 +31,6 @@ jobs:
           script: |
             cd /var/www/vhosts/claudiskochbuch.de/docker/claudisKochbuch
             git pull
-            docker stop kochbuch
-            docker rm kochbuch
-            docker rmi kochbuchImage
+
             docker build -t kochbuchImage .
             docker run -d --restart always -p 5000:5000 --name kochbuch kochbuchImage
