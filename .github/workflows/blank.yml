@@ -32,5 +32,5 @@ jobs:
             cd /var/www/vhosts/claudiskochbuch.de/docker/claudisKochbuch
             git pull
 
-            docker build -t kochbuchImage .
-            docker run -d --restart always -p 5000:5000 --name kochbuch kochbuchImage
+            docker build -t kochbuchimage .
+            docker run -d --restart always -p 5000:5000 --name kochbuch kochbuchimage
