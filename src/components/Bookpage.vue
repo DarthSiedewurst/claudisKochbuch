@@ -1,9 +1,12 @@
 <template>
   <div>
     {{ recipe }}
-    IMG
-    <img class="recipe" :src="getImgUrl()" />
-    IMG
+    <div v-if="recipe.header">
+      <h1>{{ recipe.name }}</h1>
+    </div>
+    <div v-else>
+      <img class="recipe" :src="getImgUrl()" />
+    </div>
   </div>
 </template>
 
@@ -12,7 +15,7 @@ import { Irecipe } from "@/config";
 import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component({
-  components: {},
+  components: {}
 })
 export default class Bookpage extends Vue {
   @Prop() private recipe!: Irecipe;
@@ -25,8 +28,9 @@ export default class Bookpage extends Vue {
 
 <style lang="scss" scoped>
 .recipe {
-  width: 50vw;
-  height: 90vh;
+  display: block;
+  width: 40%;
+  height: 40%;
   margin: auto;
 }
 </style>
