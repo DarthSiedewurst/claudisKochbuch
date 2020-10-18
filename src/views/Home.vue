@@ -1,36 +1,26 @@
 <template>
   <div>
     <b-button v-b-toggle.sidebar-1>Inhaltsverzeichnis</b-button>
-    <b-sidebar
-      id="sidebar-1"
-      title="Inhaltsverzeichnis"
-      backdrop
-      no-header-close
-      shadow
-      ref="sidebar"
-    >
+    <b-sidebar id="sidebar-1" title="Inhaltsverzeichnis" backdrop no-header-close shadow ref="sidebar">
       <nav class="mb-3">
         <b-nav vertical>
           <b-nav-item
-            :class="[recipe.header ? 'linkToHeader' : 'linkToRecipe']"
-            v-for="recipe in recipes"
+            v-for="recipe in shownRecipes"
+            :class="[recipe.visible ? '' : 'hidden', recipe.header ? 'linkToHeader' : 'linkToRecipe']"
             :key="recipe.page"
-            @click="goToPage(recipe.page)"
-            >{{ recipe.name }}</b-nav-item
+            @click="goToPage(recipe)"
           >
+            {{ recipe.name }}
+          </b-nav-item>
         </b-nav>
       </nav>
     </b-sidebar>
-    <div v-for="recipe in recipes" :key="recipe.page">
-      <bookpage
-        class="bookpage"
-        :recipe="recipe"
-        v-show="currentPage === recipe.page"
-      ></bookpage>
+    <div v-for="recipe in shownRecipes" :key="recipe.page">
+      <bookpage class="bookpage" :recipe="recipe" v-show="currentPage === recipe.page"></bookpage>
     </div>
     <b-pagination
       v-model="currentPage"
-      :total-rows="recipes.length"
+      :total-rows="shownRecipes.length - 1"
       per-page="1"
       align="center"
     ></b-pagination>
@@ -38,29 +28,48 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue } from 'vue-property-decorator';
 //import Recipes, { Irecipe } from "../assets/recipes";
-import Recipes, { Iheader, Irecipe } from "@/config";
-import Bookpage from "@/components/Bookpage.vue";
+import Recipes, { Irecipe } from '@/config';
+import Bookpage from '@/components/Bookpage.vue';
 
 @Component({
-  components: { Bookpage }
+  components: { Bookpage },
 })
 export default class Home extends Vue {
   private currentPage = 1;
 
-  private get recipes() {
-    const recipes: (Irecipe | Iheader)[] = [];
-    for (const recipe of Recipes) {
-      recipes.splice(recipe.page - 1, 0, recipe);
-    }
-    return recipes;
+  private recipes = Recipes;
+
+  private get shownRecipes() {
+    return this.recipes;
   }
 
-  private goToPage(page: number) {
-    (this.$refs["sidebar"] as any).hide();
+  private goToPage(recipe: Irecipe) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    let i = recipe.page!;
+    if (recipe.header) {
+      while (!Recipes[i].header) {
+        this.recipes[i].visible = !this.recipes[i].visible;
+        i++;
+        this.$forceUpdate();
+      }
+    } else {
+      //(this.$refs['sidebar'] as any).hide();
 
-    this.currentPage = page;
+      this.currentPage = recipe.page!;
+    }
+  }
+  private mounted() {
+    const recipes: Irecipe[] = [];
+    for (let i = 0; i < Recipes.length; i++) {
+      recipes.push(Recipes[i]);
+      recipes[i].page = i + 1;
+      if (Recipes[i].visible === undefined) {
+        recipes[i].visible = true;
+      }
+    }
+    this.recipes = recipes;
   }
 }
 </script>
@@ -68,13 +77,18 @@ export default class Home extends Vue {
 <style lang="scss" scoped>
 .bookpage {
   width: 50vw;
-  height: 90vh;
+  height: 80vh;
   margin: auto;
 }
 .linkToRecipe {
-  color: red;
+  transition: all 5s linear;
+  display: block;
+  margin-left: 2vw !important;
 }
 .linkToHeader {
-  color: blue;
+}
+.hidden {
+  display: none !important;
+  transition: all 5s linear;
 }
 </style>

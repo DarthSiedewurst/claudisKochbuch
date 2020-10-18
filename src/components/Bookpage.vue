@@ -1,12 +1,6 @@
 <template>
   <div>
-    {{ recipe }}
-    <div v-if="recipe.header">
-      <h1>{{ recipe.name }}</h1>
-    </div>
-    <div v-else>
-      <img class="recipe" :src="getImgUrl()" />
-    </div>
+    <img class="recipe" :src="getImgUrl()" />
   </div>
 </template>
 
@@ -29,8 +23,8 @@ export default class Bookpage extends Vue {
 <style lang="scss" scoped>
 .recipe {
   display: block;
-  width: 40%;
-  height: 40%;
+  width: 80%;
+  height: 80%;
   margin: auto;
 }
 </style>

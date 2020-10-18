@@ -1,38 +1,41 @@
 export interface Irecipe {
   src: string;
   name: string;
-  page: number;
-  zutaten: string[];
-}
-export interface Iheader {
-  header: boolean;
-  name: string;
-  page: number;
+  zutaten?: string[];
+  page?: number;
+  header: boolean
+  visible?: boolean
 }
 
-const recipes: (Irecipe | Iheader)[] = [
+const recipes: Irecipe[] = [
   {
-    header: true,
-    name: "Start",
-    page: 1,
+    src: "KartoffelGemuesePfanne.jpg",
+    name: "Fleischgerichte",
+    header: true
   },
   {
     src: "KartoffelGemuesePfanne.jpg",
     name: "Kartoffelgemüsepfanne",
-    page: 2,
     zutaten: ["Salz"],
+    header: false,
   },
   {
     src: "Doeppekooche.jpg",
     name: "Döppekooche",
-    page: 3,
     zutaten: ["Pfeffer"],
+    header: false
   },
   {
     src: "KuerbisLasagne.jpg",
     name: "Kürbis-Lasagne",
-    page: 4,
     zutaten: ["Pfeffer"],
+    header: false
+  },
+    {
+    src: "KartoffelGemuesePfanne.jpg",
+    name: "Ende",
+    header: true,
+    visible: false
   },
 ];
 
