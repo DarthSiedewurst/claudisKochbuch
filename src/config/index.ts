@@ -28,12 +28,12 @@ const recipes: Irecipe[] = [
   {
     src: "KuerbisLasagne.jpg",
     name: "Kürbis-Lasagne",
-    zutaten: ["Pfeffer"],
+    zutaten: ["Pfeffer", "Kürbis"],
     header: false
   },
     {
     src: "KartoffelGemuesePfanne.jpg",
-    name: "Ende",
+    name: " ",
     header: true,
     visible: false
   },

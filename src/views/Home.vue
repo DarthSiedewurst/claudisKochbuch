@@ -2,13 +2,30 @@
   <div>
     <b-button v-b-toggle.sidebar-1>Inhaltsverzeichnis</b-button>
     <b-sidebar id="sidebar-1" title="Inhaltsverzeichnis" backdrop no-header-close shadow ref="sidebar">
+      <label class="typo__label">Zutaten</label>
+      <multiselect
+        v-model="ingredient"
+        :options="ingredients"
+        :multiple="true"
+        :close-on-select="false"
+        :clear-on-select="false"
+        placeholder="Pick some"
+        :preselect-first="false"
+        @close="shownRecipeHeaders"
+      >
+        <template slot="selection" slot-scope="{ values, search, isOpen }"
+          ><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen"
+            >{{ values.length }} Zutaten ausgewählt</span
+          ></template
+        >
+      </multiselect>
       <nav class="mb-3">
         <b-nav vertical>
           <b-nav-item
             v-for="recipe in shownRecipes"
             :class="[recipe.visible ? '' : 'hidden', recipe.header ? 'linkToHeader' : 'linkToRecipe']"
             :key="recipe.page"
-            @click="goToPage(recipe)"
+            @click="headerClicked(recipe)"
           >
             {{ recipe.name }}
           </b-nav-item>
@@ -37,6 +54,7 @@ import Bookpage from '@/components/Bookpage.vue';
   components: { Bookpage },
 })
 export default class Home extends Vue {
+  private ingredient = [];
   private currentPage = 1;
 
   private recipes = Recipes;
@@ -45,7 +63,45 @@ export default class Home extends Vue {
     return this.recipes;
   }
 
-  private goToPage(recipe: Irecipe) {
+  private get ingredients() {
+    const ingredient: string[] = [];
+    Recipes.forEach((element) => {
+      if (element.zutaten) {
+        element.zutaten.forEach((x) => {
+          if (ingredient.indexOf(x) < 0) {
+            ingredient.push(x);
+          }
+        });
+      }
+    });
+    return ingredient;
+  }
+
+  private shownRecipeHeaders() {
+    const recipes: Irecipe[] = [];
+    for (let i = 0; i < Recipes.length; i++) {
+      recipes.push(Recipes[i]);
+    }
+    if (this.ingredient.length > 0) {
+      recipes.forEach((x) => {
+        if (x.zutaten) {
+          const isInTngredient = (value: string) => x.zutaten!.includes(value);
+          const shouldShow = this.ingredient.every(isInTngredient);
+          shouldShow ? (x.visible = true) : (x.visible = false);
+        } else {
+          x.visible = false;
+        }
+      });
+    } else {
+      recipes.forEach((x) => {
+        x.visible = true;
+      });
+    }
+
+    this.recipes = recipes;
+  }
+
+  private headerClicked(recipe: Irecipe) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     let i = recipe.page!;
     if (recipe.header) {
@@ -55,7 +111,7 @@ export default class Home extends Vue {
         this.$forceUpdate();
       }
     } else {
-      //(this.$refs['sidebar'] as any).hide();
+      (this.$refs['sidebar'] as any).hide();
 
       this.currentPage = recipe.page!;
     }
