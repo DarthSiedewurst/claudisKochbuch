@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="background">
     <b-button v-b-toggle.sidebar-1>Inhaltsverzeichnis</b-button>
     <b-sidebar id="sidebar-1" title="Inhaltsverzeichnis" backdrop no-header-close shadow ref="sidebar">
       <label class="typo__label">Zutaten</label>
@@ -9,7 +9,7 @@
         :multiple="true"
         :close-on-select="false"
         :clear-on-select="false"
-        placeholder="Pick some"
+        placeholder="auswählen"
         :preselect-first="false"
         @close="shownRecipeHeaders"
       >
@@ -74,6 +74,7 @@ export default class Home extends Vue {
         });
       }
     });
+    ingredient.sort();
     return ingredient;
   }
 
@@ -131,11 +132,50 @@ export default class Home extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.background {
+  background-image: url('~@/assets/img/background.png');
+  width: 100vw;
+  height: 100vh;
+  background-size: 100% 100%;
+}
 .bookpage {
   width: 50vw;
-  height: 80vh;
+  height: 85vh;
   margin: auto;
+  animation: fadeIn ease 1s;
+  -webkit-animation: fadeIn ease 1s;
+  -moz-animation: fadeIn ease 1s;
+  -o-animation: fadeIn ease 1s;
+  -ms-animation: fadeIn ease 1s;
 }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .linkToRecipe {
   transition: all 5s linear;
   display: block;
@@ -146,5 +186,10 @@ export default class Home extends Vue {
 .hidden {
   display: none !important;
   transition: all 5s linear;
+}
+@media only screen and (max-width: 600px) {
+  .bookpage {
+    width: 100vw;
+  }
 }
 </style>
