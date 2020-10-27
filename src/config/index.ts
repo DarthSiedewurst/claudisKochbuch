@@ -16,7 +16,7 @@ const recipes: Irecipe[] = [
   {
     src: "KartoffelGemuesePfanne.jpg",
     name: "Kartoffelgemüsepfanne",
-    zutaten: ["Salz"],
+    zutaten: ["Salz","Kartoffeln"],
     header: false,
   },
   {
