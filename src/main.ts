@@ -7,6 +7,26 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import "vue-multiselect/dist/vue-multiselect.min.css";
 import Multiselect from 'vue-multiselect';
+import { ValidationProvider, ValidationObserver } from 'vee-validate';
+import { extend } from 'vee-validate';
+import { required } from 'vee-validate/dist/rules';
+
+
+extend('isUser', value => {
+  return value === 'Claudi';
+});
+
+extend('isPassword', value => {
+  return value === 'sKochbuch';
+});
+
+extend('required', {
+  ...required,
+  message: 'This field is required'
+});
+
+Vue.component('ValidationProvider', ValidationProvider);
+Vue.component('ValidationObserver', ValidationObserver);
 
 // register globally
 Vue.component('multiselect', Multiselect)

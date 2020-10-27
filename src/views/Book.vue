@@ -13,7 +13,7 @@
         :preselect-first="false"
         @close="shownRecipeHeaders"
       >
-        <template slot="selection" slot-scope="{ values, search, isOpen }"
+        <template slot="selection" slot-scope="{ values, isOpen }"
           ><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen"
             >{{ values.length }} Zutaten ausgewählt</span
           ></template
@@ -53,7 +53,7 @@ import Bookpage from '@/components/Bookpage.vue';
 @Component({
   components: { Bookpage },
 })
-export default class Home extends Vue {
+export default class Book extends Vue {
   private ingredient = [];
   private currentPage = 1;
 
@@ -132,12 +132,6 @@ export default class Home extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.background {
-  background-image: url('~@/assets/img/background.png');
-  width: 100vw;
-  height: 100vh;
-  background-size: 100% 100%;
-}
 .bookpage {
   width: 50vw;
   height: 85vh;
