@@ -1,5 +1,5 @@
 FROM node:12
-MAINTAINER marcomueller
+LABEL MAINTAINER="marcomueller"
 WORKDIR /app
 COPY . /app
 RUN npm install
