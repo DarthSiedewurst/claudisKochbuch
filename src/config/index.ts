@@ -9,6 +9,11 @@ export interface Irecipe {
 
 const recipes: Irecipe[] = [
   {
+    src: "Himbeer-Traum, Joghurtbombe, Kirsch-Philadelphia-Creme.jpg",
+    name: "Himbeer-Traum, Joghurtbombe, Kirsch-Philadelphia-Creme",
+    header: false
+  },
+  {
     src: "KartoffelGemuesePfanne.jpg",
     name: "Fleischgerichte",
     header: true

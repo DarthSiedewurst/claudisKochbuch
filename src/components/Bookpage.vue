@@ -30,7 +30,7 @@ export default class Bookpage extends Vue {
   padding: 1wv;
   border-image: url('~@/assets/img/border.png');
   border-image-slice: 50;
-  border-image-width: 1;
-  border-radius: 10vw;
+  border-image-width: 0.8;
+  border-radius: 5vw;
 }
 </style>
