@@ -133,7 +133,7 @@ export default class Book extends Vue {
 
 <style lang="scss" scoped>
 .bookpage {
-  width: 50vw;
+  width: 40vw;
   height: 85vh;
   margin: auto;
   animation: fadeIn ease 1s;
