@@ -12,7 +12,14 @@ const recipes: Irecipe[] = [
     src: "Himbeer-Traum, Joghurtbombe, Kirsch-Philadelphia-Creme.jpg",
     name: "Himbeer-Traum, Joghurtbombe, Kirsch-Philadelphia-Creme",
     header: true
+  }, 
+  {
+    src: "Erdbeer-Quark.jpg",
+    name: "Erdbeer-Quark",
+    zutaten: ["Erdbeeren","Quark"],
+    header: false,
   },
+
   {
     src: "Joghurtbombe.jpg",
     name: "Joghurtbombe",
