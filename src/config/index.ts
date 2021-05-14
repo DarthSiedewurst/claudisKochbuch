@@ -19,11 +19,16 @@ const recipes: Irecipe[] = [
     zutaten: ["Erdbeeren","Quark"],
     header: false,
   },
-
   {
     src: "Joghurtbombe.jpg",
     name: "Joghurtbombe",
     header: false
+  },
+  {
+    src: "Pizzasoße - unfertig.jpg",
+    name: "Pizzasoße",
+    zutaten: ["Tomaten","Tomatenmark"],
+    header: false,
   },
   {
     src: "KartoffelGemuesePfanne.jpg",
