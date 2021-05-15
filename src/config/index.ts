@@ -25,7 +25,7 @@ const recipes: Irecipe[] = [
     header: false
   },
   {
-    src: "Pizzasoße - unfertig.jpg",
+    src: "Pizzasoße.jpg",
     name: "Pizzasoße",
     zutaten: ["Tomaten","Tomatenmark"],
     header: false,
