@@ -35,7 +35,7 @@ jobs:
             docker rmi kochbuchimage
             docker build -t kochbuchimage .
             docker container run -it -d -v "$(pwd):/app" --name kochbuch kochbuchimage
-            docker exec ui npm i
-            docker exec ui npm run build
+            docker exec kochbuch npm i
+            docker exec kochbuch npm run build
             docker stop kochbuch
             docker rm kochbuch
