@@ -42,12 +42,6 @@ const recipes: Irecipe[] = [
     header: false,
   },
   {
-    src: "Doeppekooche.jpg",
-    name: "Döppekooche",
-    zutaten: ["Pfeffer"],
-    header: false
-  },
-  {
     src: "KuerbisLasagne.jpg",
     name: "Kürbis-Lasagne",
     zutaten: ["Pfeffer", "Kürbis"],
