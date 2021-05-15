@@ -1,7 +1,6 @@
-FROM node:12.14
-LABEL MAINTAINER="marcomueller"
+FROM centos:8.3.2011
+LABEL maintainer="marco_mueller_1993@hotmail.de"
+RUN dnf module enable nodejs:12 -qy
+RUN dnf install nodejs -qy
 WORKDIR /app
-COPY . /app
-RUN npm install
-RUN npm run build
-CMD npm run start
+VOLUME [ "/app" ]
