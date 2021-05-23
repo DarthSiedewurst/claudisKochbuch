@@ -30,9 +30,12 @@ jobs:
           password: ${{ secrets.PW }}
           script: |
             cd /var/www/vhosts/claudiskochbuch.de/docker/claudisKochbuch
+            git reset --hard
             git pull
-            docker stop kochbuch
-            docker rm kochbuch
             docker rmi kochbuchimage
             docker build -t kochbuchimage .
-            docker run -d --restart always -p 5001:5001 --name kochbuch kochbuchimage
+            docker container run -it -d -v "$(pwd):/app" --name kochbuch kochbuchimage
+            docker exec kochbuch npm i
+            docker exec kochbuch npm run build
+            docker stop kochbuch
+            docker rm kochbuch
