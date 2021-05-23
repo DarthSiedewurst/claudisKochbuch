@@ -8,11 +8,7 @@ export interface Irecipe {
 }
 
 const recipes: Irecipe[] = [
-  {
-    src: "Himbeer-Traum, Joghurtbombe, Kirsch-Philadelphia-Creme.jpg",
-    name: "Himbeer-Traum, Joghurtbombe, Kirsch-Philadelphia-Creme",
-    header: true
-  }, 
+   
   {
     src: "Erdbeer-Quark.jpg",
     name: "Erdbeer-Quark",
@@ -31,27 +27,10 @@ const recipes: Irecipe[] = [
     header: false,
   },
   {
-    src: "KartoffelGemuesePfanne.jpg",
-    name: "Fleischgerichte",
-    header: true
-  },
-  {
-    src: "KartoffelGemuesePfanne.jpg",
-    name: "Kartoffelgemüsepfanne",
-    zutaten: ["Salz","Kartoffeln"],
+    src: "Pizzasoße.jpg",
+    name: "Pizzasoße",
+    zutaten: ["Tomaten","Tomatenmark"],
     header: false,
-  },
-  {
-    src: "KuerbisLasagne.jpg",
-    name: "Kürbis-Lasagne",
-    zutaten: ["Pfeffer", "Kürbis"],
-    header: false
-  },
-    {
-    src: "KartoffelGemuesePfanne.jpg",
-    name: " ",
-    header: true,
-    visible: false
   },
 ];
 
